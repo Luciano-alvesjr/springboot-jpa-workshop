@@ -1,0 +1,70 @@
+# Run with the default test profile before sending these requests.
+@baseUrl = http://localhost:8080
+
+### Users
+GET {{baseUrl}}/users
+
+### User details
+GET {{baseUrl}}/users/1
+
+### Create a user (send only once, or change the email)
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "Bob Brown",
+  "email": "bob@gmail.com",
+  "phone": "977557755",
+  "password": "123456"
+}
+
+### Update the created user (replace 3 with the returned ID)
+PUT {{baseUrl}}/users/3
+Content-Type: application/json
+
+{
+  "name": "Bob Updated",
+  "email": "bob.updated@gmail.com",
+  "phone": "977557755"
+}
+
+### Delete the created user
+DELETE {{baseUrl}}/users/3
+
+### Products and categories
+GET {{baseUrl}}/products
+
+### Product with two categories
+GET {{baseUrl}}/products/3
+
+### Categories
+GET {{baseUrl}}/categories
+
+### Category
+GET {{baseUrl}}/categories/1
+
+### Orders
+GET {{baseUrl}}/orders
+
+### Paid order with items and payment
+GET {{baseUrl}}/orders/1
+
+### Unpaid order
+GET {{baseUrl}}/orders/3
+
+### Missing resource (404)
+GET {{baseUrl}}/users/99999
+
+### User with orders cannot be deleted (409)
+DELETE {{baseUrl}}/users/1
+
+### Invalid input (400)
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "name": "",
+  "email": "invalid",
+  "phone": "",
+  "password": "123"
+}
